@@ -19,7 +19,9 @@ public class ServicoMunicipal
     public Cidadao Cidadao { get; private set; }
     public Familia Familia { get; private set; }
     public Reclamacao Reclamacao { get; private set; }
+    public DateTime DataAtualizacao { get; private set; }
+    public DateTime DataCriacao { get; private set; }
 
-    // Constutro privado para o Entity Framework
+    // Construtor privado para o Entity Framework
     private ServicoMunicipal() { }
 }

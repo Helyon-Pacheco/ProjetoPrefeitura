@@ -21,4 +21,7 @@ public interface IServicoMunicipalRepository
     Task<IEnumerable<ServicoMunicipal>> ObterPorCidadaoAsync (Cidadao cidadao);
     Task<IEnumerable<ServicoMunicipal>> ObterPorFamiliaAsync (Familia familia);
     Task<IEnumerable<ServicoMunicipal>> ObterPorReclamacaoAsync (Reclamacao reclamacao);
+    Task Adicionar(ServicoMunicipal servicoMunicipal);
+    Task Atualizar(ServicoMunicipal servicoMunicipal);
+    Task Remover(ServicoMunicipal servicoMunicipal);
 }

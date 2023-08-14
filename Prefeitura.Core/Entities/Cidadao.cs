@@ -10,8 +10,10 @@ public class Cidadao
     public string Cpf { get; private set; }
     public DateTime DataNascimento { get; private set; }
     public string Email { get; private set; }
+    public string Telefone { get; private set; }
     public Endereco Endereco { get; private set; }
     public Familia Familia { get; private set; }
+    public Guid FamiliaId { get; private set; }
     public bool Ativo { get; private set; }
     public DateTime DataCriacao { get; private set; }
     public DateTime? DataAtualizacao { get; private set; }

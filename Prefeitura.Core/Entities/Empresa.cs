@@ -16,6 +16,6 @@ public class Empresa
     public string EmailResponsavel { get; private set; }
     public Endereco Endereco { get; private set; }
 
-    // Constutro privado para o Entity Framework
+    // Construtor privado para o Entity Framework
     private Empresa() { }
 }

@@ -16,7 +16,11 @@ public class Reclamacao
     public string TipoOcorrencia { get; private set; }
     public string TipoSolicitante { get; private set; }
     public Endereco TipoEndereco { get; private set; }
+    public Guid CidadaoId { get; private set; }
+    public DateTime DataAtualizacao { get; private set; }
+    public DateTime DataCriacao { get; private set; }
+    public bool Ativo { get; private set; }
 
-    // Constutro privado para o Entity Framework
+    // Construtor privado para o Entity Framework
     private Reclamacao() { }
 }

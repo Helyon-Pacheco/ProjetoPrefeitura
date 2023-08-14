@@ -12,4 +12,7 @@ public interface IPropriedadeRepository
     Task<IEnumerable<Propriedade>> ObterPorEnderecoAsync (Endereco endereco);
     Task<IEnumerable<Propriedade>> ObterPorCepAsync (string cep);
     Task<IEnumerable<Propriedade>> ObterPorValorAvaliadoAsync (decimal valorAvaliado);
+    Task Adicionar(Propriedade propriedade);
+    Task Atualizar(Propriedade propriedade);
+    Task Remover(Propriedade propriedade);
 }
