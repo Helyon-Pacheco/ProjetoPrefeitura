@@ -4,15 +4,16 @@ namespace Prefeitura.Core.Repositories;
 
 public interface ICidadaoRepository
 {
-    Task<Cidadao> ObterPorId(Guid id);
-    Task<Cidadao> ObterPorCpf(string cpf);
-    Task<IEnumerable<Cidadao>> ObterTodos();
-    Task<IEnumerable<Cidadao>> ObterTodosAtivos();
-    Task<IEnumerable<Cidadao>> ObterTodosInativos();
-    Task<IEnumerable<Cidadao>> ObterTodosPorFamilia(Guid familiaId);
-    Task<IEnumerable<Cidadao>> ObterTodosAtivosPorFamilia(Guid familiaId);
-    Task<IEnumerable<Cidadao>> ObterTodosInativosPorFamilia(Guid familiaId);
-    Task Adicionar(Cidadao cidadao);
-    Task Atualizar(Cidadao cidadao);
-    Task Remover(Cidadao cidadao);
+    Task<Cidadao> ObterPorIdAsync(Guid id);
+    Task<Cidadao> ObterPorCpfAsync(string cpf);
+    Task<Cidadao> ObterPorEmailAsync(string email);
+    Task<IEnumerable<Cidadao>> ObterTodosAsync();
+    Task<IEnumerable<Cidadao>> ObterTodosAtivosAsync();
+    Task<IEnumerable<Cidadao>> ObterTodosInativosAsync();
+    Task<IEnumerable<Cidadao>> ObterTodosPorFamiliaAsync(Guid familiaId);
+    Task<IEnumerable<Cidadao>> ObterTodosAtivosPorFamiliaAsync(Guid familiaId);
+    Task<IEnumerable<Cidadao>> ObterTodosInativosPorFamiliaAsync(Guid familiaId);
+    Task<Cidadao> Adicionar(Cidadao cidadao);
+    Task<Cidadao> Atualizar(Cidadao cidadao);
+    Task<Cidadao> Remover(Cidadao cidadao);
 }

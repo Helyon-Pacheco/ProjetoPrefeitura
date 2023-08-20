@@ -69,22 +69,25 @@ public class PropriedadeRepository : IPropriedadeRepository
             .ToListAsync();
     }
 
-    public async Task Adicionar(Propriedade propriedade)
+    public async Task<Propriedade> Adicionar(Propriedade propriedade)
     {
         await _context.Propriedades.AddAsync(propriedade);
         await _context.SaveChangesAsync();
+        return propriedade;
     }
 
-    public async Task Atualizar(Propriedade propriedade)
+    public async Task<Propriedade> Atualizar(Propriedade propriedade)
     {
         _context.Propriedades.Update(propriedade);
         await _context.SaveChangesAsync();
+        return propriedade;
     }
 
-    public async Task Remover(Propriedade propriedade)
+    public async Task<Propriedade> Remover(Propriedade propriedade)
     {
         _context.Propriedades.Remove(propriedade);
         await _context.SaveChangesAsync();
+        return propriedade;
     }
 
     public void Dispose()

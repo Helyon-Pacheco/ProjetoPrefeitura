@@ -18,7 +18,7 @@ public interface IReclamacaoRepository
     Task<IEnumerable<Reclamacao>> ObterPorTipoOcorrenciaAsync (string tipoOcorrencia);
     Task<IEnumerable<Reclamacao>> ObterPorTipoSolicitanteAsync (string tipoSolicitante);
     Task<IEnumerable<Reclamacao>> ObterPorTipoEnderecoAsync (Endereco tipoEndereco);
-    Task Adicionar(Reclamacao reclamacao);
-    Task Atualizar(Reclamacao reclamacao);
-    Task Remover(Reclamacao reclamacao);
+    Task<Reclamacao> Adicionar(Reclamacao reclamacao);
+    Task<Reclamacao> Atualizar(Reclamacao reclamacao);
+    Task<Reclamacao> Remover(Reclamacao reclamacao);
 }

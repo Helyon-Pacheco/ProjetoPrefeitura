@@ -17,7 +17,7 @@ public interface IEmpresaRepository
     Task<IEnumerable<Empresa>> ObterPorTelefoneResponsavelAsync (string telefoneResponsavel);
     Task<IEnumerable<Empresa>> ObterPorEmailResponsavelAsync (string emailResponsavel);
     Task<IEnumerable<Empresa>> ObterPorEnderecoAsync (Endereco endereco);
-    Task Adicionar(Empresa empresa);
-    Task Atualizar(Empresa empresa);
-    Task Remover(Empresa empresa);
+    Task<Empresa> Adicionar(Empresa empresa);
+    Task<Empresa> Atualizar(Empresa empresa);
+    Task<Empresa> Remover(Empresa empresa);
 }

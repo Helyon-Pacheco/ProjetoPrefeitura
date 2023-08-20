@@ -19,6 +19,9 @@ public class ServicoMunicipal
     public Cidadao Cidadao { get; private set; }
     public Familia Familia { get; private set; }
     public Reclamacao Reclamacao { get; private set; }
+    public string Status { get; private set; }
+    public string Observacao { get; private set; }
+    public string Tipo { get; private set; }
     public DateTime DataAtualizacao { get; private set; }
     public DateTime DataCriacao { get; private set; }
 

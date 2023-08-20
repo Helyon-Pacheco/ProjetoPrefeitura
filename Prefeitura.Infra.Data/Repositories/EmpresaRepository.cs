@@ -75,22 +75,25 @@ public class EmpresaRepository : IEmpresaRepository
         return await _context.Empresas.ToListAsync();
     }
 
-    public async Task Adicionar(Empresa empresa)
+    public async Task<Empresa> Adicionar(Empresa empresa)
     {
         await _context.Empresas.AddAsync(empresa);
         await _context.SaveChangesAsync();
+        return empresa;
     }
 
-    public async Task Atualizar(Empresa empresa)
+    public async Task<Empresa> Atualizar(Empresa empresa)
     {
         _context.Empresas.Update(empresa);
         await _context.SaveChangesAsync();
+        return empresa;
     }
 
-    public async Task Remover(Empresa empresa)
+    public async Task<Empresa> Remover(Empresa empresa)
     {
         _context.Empresas.Remove(empresa);
         await _context.SaveChangesAsync();
+        return empresa;
     }
 
     public void Dispose()

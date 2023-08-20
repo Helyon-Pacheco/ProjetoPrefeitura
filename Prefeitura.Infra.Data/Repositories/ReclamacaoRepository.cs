@@ -80,22 +80,25 @@ public class ReclamacaoRepository : IReclamacaoRepository
         return await _context.Reclamacoes.ToListAsync();
     }
 
-    public async Task Adicionar(Reclamacao reclamacao)
+    public async Task<Reclamacao> Adicionar(Reclamacao reclamacao)
     {
         await _context.Reclamacoes.AddAsync(reclamacao);
         await _context.SaveChangesAsync();
+        return reclamacao;
     }
 
-    public async Task Atualizar(Reclamacao reclamacao)
+    public async Task<Reclamacao> Atualizar(Reclamacao reclamacao)
     {
         _context.Reclamacoes.Update(reclamacao);
         await _context.SaveChangesAsync();
+        return reclamacao;
     }
 
-    public async Task Remover(Reclamacao reclamacao)
+    public async Task<Reclamacao> Remover(Reclamacao reclamacao)
     {
         _context.Reclamacoes.Remove(reclamacao);
         await _context.SaveChangesAsync();
+        return reclamacao;
     }
 
     public void Dispose()
