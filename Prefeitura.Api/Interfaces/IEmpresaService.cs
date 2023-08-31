@@ -19,5 +19,5 @@ public interface IEmpresaService
     Task<IEnumerable<Empresa>> ObterEmpresasPorEndereco(Endereco endereco);
     Task<Empresa> AdicionarEmpresa(Empresa empresa);
     Task<Empresa> AtualizarEmpresa(Empresa empresa);
-    Task<Empresa> RemoverEmpresa(Guid id);
+    Task<Empresa> RemoverEmpresa(Empresa empresa);
 }

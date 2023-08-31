@@ -24,9 +24,8 @@ public class EmpresaService : IEmpresaService
         return await _empresaRepository.Atualizar(empresa);
     }
 
-    public async Task<Empresa> RemoverEmpresa(Guid id)
+    public async Task<Empresa> RemoverEmpresa(Empresa empresa)
     {
-        var empresa = await _empresaRepository.ObterPorIdAsync(id);
         return await _empresaRepository.Remover(empresa);
     }
 

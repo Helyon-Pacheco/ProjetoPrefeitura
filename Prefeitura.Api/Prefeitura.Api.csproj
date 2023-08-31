@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Prefeitura.Core\Prefeitura.Core.csproj" />
+    <ProjectReference Include="..\Prefeitura.Infra.Data\Prefeitura.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>
