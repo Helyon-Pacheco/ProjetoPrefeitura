@@ -4,8 +4,16 @@ using Prefeitura.Api.Services;
 using Prefeitura.Core.Repositories;
 using Prefeitura.Infra.Data.Context;
 using Prefeitura.Infra.Data.Repositories;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Inicializa o Serilog
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
+builder.Host.UseSerilog(); // Use Serilog como o provedor de logging
 
 var app = builder.Build();
 
