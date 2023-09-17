@@ -1,9 +1,16 @@
+using Microsoft.EntityFrameworkCore;
+using Prefeitura.Infra.Data.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<PrefeituraContext>(options => options.UseSqlServer(connectionString));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

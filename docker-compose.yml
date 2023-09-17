@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  prefeitura.api:
+    image: prefeitura.api
+    build:
+      context: .
+      dockerfile: Prefeitura.Api/Dockerfile
+    ports:
+      - "5000:80"
+
+  sqlserver:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      SA_PASSWORD: "PrefeituraDbPassword"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
