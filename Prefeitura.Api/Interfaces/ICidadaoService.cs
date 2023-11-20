@@ -1,17 +1,17 @@
-﻿using Prefeitura.Core.Entities;
+﻿using Prefeitura.Core.DTOs;
 
 namespace Prefeitura.Api.Interfaces;
 
 public interface ICidadaoService
 {
-    Task<Cidadao> ObterCidadaoPorIdAsync(Guid id);
-    Task<IEnumerable<Cidadao>> ObterCidadaosAsync();
-    Task<Cidadao> ObterCidadaoPorCpfAsync(string cpf);
-    Task<Cidadao> ObterCidadaoPorEmailAsync(string email);
-    Task<IEnumerable<Cidadao>> ObterCidadaosPorFamilia(Guid familiaId);
-    Task<IEnumerable<Cidadao>> ObterCidadaosAtivosAsync();
-    Task<IEnumerable<Cidadao>> ObterCidadaosInativosAsync();
-    Task<Cidadao> AdicionarCidadaoAsync(Cidadao cidadao);
-    Task<Cidadao> AtualizarCidadaoAsync(Cidadao cidadao);
-    Task<Cidadao> RemoverCidadaoAsync(Cidadao cidadao);
+    Task<CidadaoDto> AdicionarCidadaoAsync(CidadaoDto cidadaoDto);
+    Task<CidadaoDto> AtualizarCidadaoAsync(CidadaoDto cidadaoDto);
+    Task<CidadaoDto> RemoverCidadaoAsync(CidadaoDto cidadaoDto);
+    Task<CidadaoDto> ObterCidadaoPorIdAsync(Guid id);
+    Task<IEnumerable<CidadaoDto>> ObterCidadaosAsync();
+    Task<CidadaoDto> ObterCidadaoPorCpfAsync(string cpf);
+    Task<CidadaoDto> ObterCidadaoPorEmailAsync(string email);
+    Task<IEnumerable<CidadaoDto>> ObterCidadaosPorFamilia(Guid familiaId);
+    Task<IEnumerable<CidadaoDto>> ObterCidadaosAtivosAsync();
+    Task<IEnumerable<CidadaoDto>> ObterCidadaosInativosAsync();
 }

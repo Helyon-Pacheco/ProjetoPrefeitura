@@ -1,4 +1,6 @@
-﻿using Prefeitura.Api.Interfaces;
+﻿using AutoMapper;
+using Prefeitura.Api.Interfaces;
+using Prefeitura.Core.DTOs;
 using Prefeitura.Core.Entities;
 using Prefeitura.Core.Repositories;
 using Prefeitura.Core.ValueObjects;
@@ -8,89 +10,111 @@ namespace Prefeitura.Api.Services;
 public class ReclamacaoService : IReclamacaoService
 {
     private readonly IReclamacaoRepository _reclamacaoRepository;
+    private readonly IMapper _mapper;
 
-    public ReclamacaoService(IReclamacaoRepository reclamacaoRepository)
+    public ReclamacaoService(IReclamacaoRepository reclamacaoRepository, IMapper mapper)
     {
         _reclamacaoRepository = reclamacaoRepository;
+        _mapper = mapper;
     }
 
-    public async Task<Reclamacao> ObterPorIdAsync(Guid id)
+    public async Task<ReclamacaoDto> AdicionarReclamacaoAsync(ReclamacaoDto reclamacaoDto)
     {
-        return await _reclamacaoRepository.ObterPorIdAsync(id);
+        var reclamacao = _mapper.Map<Reclamacao>(reclamacaoDto);
+        var resultado = await _reclamacaoRepository.Adicionar(reclamacao);
+        return _mapper.Map<ReclamacaoDto>(resultado);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterTodosAsync()
+    public async Task<ReclamacaoDto> AtualizarReclamacaoAsync(ReclamacaoDto reclamacaoDto)
     {
-        return await _reclamacaoRepository.ObterTodosAsync();
+        var reclamacao = _mapper.Map<Reclamacao>(reclamacaoDto);
+        var resultado = await _reclamacaoRepository.Atualizar(reclamacao);
+        return _mapper.Map<ReclamacaoDto>(resultado);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorDescricaoAsync(string descricao)
+    public async Task<ReclamacaoDto> RemoverReclamacaoAsync(ReclamacaoDto reclamacaoDto)
     {
-        return await _reclamacaoRepository.ObterPorDescricaoAsync(descricao);
+        var reclamacao = _mapper.Map<Reclamacao>(reclamacaoDto);
+        var resultado = await _reclamacaoRepository.Remover(reclamacao);
+        return _mapper.Map<ReclamacaoDto>(resultado);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorDataAsync(DateTime data)
+    public async Task<ReclamacaoDto> ObterPorIdAsync(Guid id)
     {
-        return await _reclamacaoRepository.ObterPorDataAsync(data);
+        var reclamacao = await _reclamacaoRepository.ObterPorIdAsync(id);
+        return _mapper.Map<ReclamacaoDto>(reclamacao);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorStatusAsync(string status)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterTodosAsync()
     {
-        return await _reclamacaoRepository.ObterPorStatusAsync(status);
+        var reclamacoes = await _reclamacaoRepository.ObterTodosAsync();
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacoes);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorObservacaoAsync(string observacao)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorDescricaoAsync(string descricao)
     {
-        return await _reclamacaoRepository.ObterPorObservacaoAsync(observacao);
+        var reclamacao = await _reclamacaoRepository.ObterPorDescricaoAsync(descricao);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorTipoAsync(string tipo)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorDataAsync(DateTime data)
     {
-        return await _reclamacaoRepository.ObterPorTipoAsync(tipo);
+        var reclamacao = await _reclamacaoRepository.ObterPorDataAsync(data);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorTipoReclamacaoAsync(string tipoReclamacao)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorStatusAsync(string status)
     {
-        return await _reclamacaoRepository.ObterPorTipoReclamacaoAsync(tipoReclamacao);
+        var reclamacao = await _reclamacaoRepository.ObterPorStatusAsync(status);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorTipoSolicitacaoAsync(string tipoSolicitacao)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorObservacaoAsync(string observacao)
     {
-        return await _reclamacaoRepository.ObterPorTipoSolicitacaoAsync(tipoSolicitacao);
+        var reclamacao = await _reclamacaoRepository.ObterPorObservacaoAsync(observacao);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorTipoServicoAsync(string tipoServico)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorTipoAsync(string tipo)
     {
-        return await _reclamacaoRepository.ObterPorTipoServicoAsync(tipoServico);
+        var reclamacao = await _reclamacaoRepository.ObterPorTipoAsync(tipo);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorTipoOcorrenciaAsync(string tipoOcorrencia)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorTipoReclamacaoAsync(string tipoReclamacao)
     {
-        return await _reclamacaoRepository.ObterPorTipoOcorrenciaAsync(tipoOcorrencia);
+        var reclamacao = await _reclamacaoRepository.ObterPorTipoReclamacaoAsync(tipoReclamacao);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorTipoSolicitanteAsync(string tipoSolicitante)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorTipoSolicitacaoAsync(string tipoSolicitacao)
     {
-        return await _reclamacaoRepository.ObterPorTipoSolicitanteAsync(tipoSolicitante);
+        var reclamacao = await _reclamacaoRepository.ObterPorTipoSolicitacaoAsync(tipoSolicitacao);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<IEnumerable<Reclamacao>> ObterPorTipoEnderecoAsync(Endereco tipoEndereco)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorTipoServicoAsync(string tipoServico)
     {
-        return await _reclamacaoRepository.ObterPorTipoEnderecoAsync(tipoEndereco);
+        var reclamacao = await _reclamacaoRepository.ObterPorTipoServicoAsync(tipoServico);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<Reclamacao> AdicionarReclamacaoAsync(Reclamacao reclamacao)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorTipoOcorrenciaAsync(string tipoOcorrencia)
     {
-        return await _reclamacaoRepository.Adicionar(reclamacao);
+        var reclamacao = await _reclamacaoRepository.ObterPorTipoOcorrenciaAsync(tipoOcorrencia);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<Reclamacao> AtualizarReclamacaoAsync(Reclamacao reclamacao)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorTipoSolicitanteAsync(string tipoSolicitante)
     {
-        return await _reclamacaoRepository.Atualizar(reclamacao);
+        var reclamacao = await _reclamacaoRepository.ObterPorTipoSolicitanteAsync(tipoSolicitante);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 
-    public async Task<Reclamacao> RemoverReclamacaoAsync(Reclamacao reclamacao)
+    public async Task<IEnumerable<ReclamacaoDto>> ObterPorTipoEnderecoAsync(EnderecoDto tipoEnderecoDto)
     {
-        return await _reclamacaoRepository.Remover(reclamacao);
+        var tipoEndereco = _mapper.Map<Endereco>(tipoEnderecoDto);
+        var reclamacao = await _reclamacaoRepository.ObterPorTipoEnderecoAsync(tipoEndereco);
+        return _mapper.Map<IEnumerable<ReclamacaoDto>>(reclamacao);
     }
 }

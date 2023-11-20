@@ -1,5 +1,7 @@
-﻿using Prefeitura.Api.Interfaces;
+﻿using AutoMapper;
+using Prefeitura.Api.Interfaces;
 using Prefeitura.Core.Aggregates;
+using Prefeitura.Core.DTOs;
 using Prefeitura.Core.Entities;
 using Prefeitura.Core.Repositories;
 
@@ -8,119 +10,151 @@ namespace Prefeitura.Api.Services;
 public class ServicoMunicipalService : IServicoMunicipalService
 {
     private readonly IServicoMunicipalRepository _servicoMunicipalRepository;
+    private readonly IMapper _mapper;
 
-    public ServicoMunicipalService(IServicoMunicipalRepository servicoMunicipalRepository)
+    public ServicoMunicipalService(IServicoMunicipalRepository servicoMunicipalRepository, IMapper mapper)
     {
         _servicoMunicipalRepository = servicoMunicipalRepository;
+        _mapper = mapper;
     }
 
-    public async Task<ServicoMunicipal> ObterServicoMunicipalPorIdAsync(Guid id)
+    public async Task<ServicoMunicipalDto> AdicionarServicoMunicipalAsync(ServicoMunicipalDto servicoMunicipalDto)
     {
-        return await _servicoMunicipalRepository.ObterPorIdAsync(id);
+        var servicoMunicipal = _mapper.Map<ServicoMunicipal>(servicoMunicipalDto);
+        var resultado = await _servicoMunicipalRepository.Adicionar(servicoMunicipal);
+        return _mapper.Map<ServicoMunicipalDto>(resultado);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisAsync()
+    public async Task<ServicoMunicipalDto> AtualizarServicoMunicipalAsync(ServicoMunicipalDto servicoMunicipalDto)
     {
-        return await _servicoMunicipalRepository.ObterTodosAsync();
+        var servicoMunicipal = _mapper.Map<ServicoMunicipal>(servicoMunicipalDto);
+        var resultado = await _servicoMunicipalRepository.Atualizar(servicoMunicipal);
+        return _mapper.Map<ServicoMunicipalDto>(resultado);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorNomeAsync(string nome)
+    public async Task<ServicoMunicipalDto> RemoverServicoMunicipalAsync(ServicoMunicipalDto servicoMunicipalDto)
     {
-        return await _servicoMunicipalRepository.ObterPorNomeAsync(nome);
+        var servicoMunicipal = _mapper.Map<ServicoMunicipal>(servicoMunicipalDto);
+        var resultado = await _servicoMunicipalRepository.Remover(servicoMunicipal);
+        return _mapper.Map<ServicoMunicipalDto>(resultado);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorDescricaoAsync(string descricao)
+    public async Task<ServicoMunicipalDto> ObterServicoMunicipalPorIdAsync(Guid id)
     {
-        return await _servicoMunicipalRepository.ObterPorDescricaoAsync(descricao);
+        var servicoMunicipal = await _servicoMunicipalRepository.ObterPorIdAsync(id);
+        return _mapper.Map<ServicoMunicipalDto>(servicoMunicipal);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorValorAsync(decimal valor)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisAsync()
     {
-        return await _servicoMunicipalRepository.ObterPorValorAsync(valor);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterTodosAsync();
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorValorMultasAsync(decimal valorMultas)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorNomeAsync(string nome)
     {
-        return await _servicoMunicipalRepository.ObterPorValorMultasAsync(valorMultas);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorNomeAsync(nome);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorValorJurosAsync(decimal valorJuros)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorDescricaoAsync(string descricao)
     {
-        return await _servicoMunicipalRepository.ObterPorValorJurosAsync(valorJuros);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorDescricaoAsync(descricao);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorValorTotalAsync(decimal valorTotal)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorValorAsync(decimal valor)
     {
-        return await _servicoMunicipalRepository.ObterPorValorTotalAsync(valorTotal);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorValorAsync(valor);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorDataVencimentoAsync(DateTime dataVencimento)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorValorMultasAsync(decimal valorMultas)
     {
-        return await _servicoMunicipalRepository.ObterPorDataVencimentoAsync(dataVencimento);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorValorMultasAsync(valorMultas);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorDataPagamentoAsync(DateTime dataPagamento)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorValorJurosAsync(decimal valorJuros)
     {
-        return await _servicoMunicipalRepository.ObterPorDataPagamentoAsync(dataPagamento);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorValorJurosAsync(valorJuros);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorPagoAsync(bool pago)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorValorTotalAsync(decimal valorTotal)
     {
-        return await _servicoMunicipalRepository.ObterPorPagoAsync(pago);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorValorTotalAsync(valorTotal);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorEmpresaAsync(Empresa empresa)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorDataVencimentoAsync(DateTime dataVencimento)
     {
-        return await _servicoMunicipalRepository.ObterPorEmpresaAsync(empresa);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorDataVencimentoAsync(dataVencimento);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorPropriedadeAsync(Propriedade propriedade)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorDataPagamentoAsync(DateTime dataPagamento)
     {
-        return await _servicoMunicipalRepository.ObterPorPropriedadeAsync(propriedade);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorDataPagamentoAsync(dataPagamento);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorCidadaoAsync(Cidadao cidadao)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorPagoAsync(bool pago)
     {
-        return await _servicoMunicipalRepository.ObterPorCidadaoAsync(cidadao);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorPagoAsync(pago);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorFamiliaAsync(Familia familia)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorEmpresaAsync(EmpresaDto empresaDto)
     {
-        return await _servicoMunicipalRepository.ObterPorFamiliaAsync(familia);
+        var empresa = _mapper.Map<Empresa>(empresaDto);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorEmpresaAsync(empresa);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorReclamacaoAsync(Reclamacao reclamacao)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorPropriedadeAsync(PropriedadeDto propriedadeDto)
     {
-        return await _servicoMunicipalRepository.ObterPorReclamacaoAsync(reclamacao);
+        var propriedade = _mapper.Map<Propriedade>(propriedadeDto);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorPropriedadeAsync(propriedade);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorStatusAsync(string status)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorCidadaoAsync(CidadaoDto cidadaoDto)
     {
-        return await _servicoMunicipalRepository.ObterPorStatusAsync(status);
+        var cidadao = _mapper.Map<Cidadao>(cidadaoDto);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorCidadaoAsync(cidadao);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorObservacaoAsync(string observacao)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorFamiliaAsync(FamiliaDto familiaDto)
     {
-        return await _servicoMunicipalRepository.ObterPorObservacaoAsync(observacao);
+        var familia = _mapper.Map<Familia>(familiaDto);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorFamiliaAsync(familia);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorTipoAsync(string tipo)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorReclamacaoAsync(ReclamacaoDto reclamacaoDto)
     {
-        return await _servicoMunicipalRepository.ObterPorTipoAsync(tipo);
+        var reclamacao = _mapper.Map<Reclamacao>(reclamacaoDto);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorReclamacaoAsync(reclamacao);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<ServicoMunicipal> AdicionarServicoMunicipalAsync(ServicoMunicipal servicoMunicipal)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorStatusAsync(string status)
     {
-        return await _servicoMunicipalRepository.Adicionar(servicoMunicipal);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorStatusAsync(status);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<ServicoMunicipal> AtualizarServicoMunicipalAsync(ServicoMunicipal servicoMunicipal)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorObservacaoAsync(string observacao)
     {
-        return await _servicoMunicipalRepository.Atualizar(servicoMunicipal);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorObservacaoAsync(observacao);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 
-    public async Task<ServicoMunicipal> RemoverServicoMunicipalAsync(ServicoMunicipal servicoMunicipal)
+    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorTipoAsync(string tipo)
     {
-        return await _servicoMunicipalRepository.Remover(servicoMunicipal);
+        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorTipoAsync(tipo);
+        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 }

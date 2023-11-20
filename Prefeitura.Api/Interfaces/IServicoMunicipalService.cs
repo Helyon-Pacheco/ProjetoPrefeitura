@@ -1,31 +1,29 @@
-﻿using Prefeitura.Core.Aggregates;
-using Prefeitura.Core.Entities;
-using Prefeitura.Core.ValueObjects;
+﻿using Prefeitura.Core.DTOs;
 
 namespace Prefeitura.Api.Interfaces;
 
 public interface IServicoMunicipalService
 {
-    Task<ServicoMunicipal> ObterServicoMunicipalPorIdAsync(Guid id);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisAsync();
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorNomeAsync(string nome);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorDescricaoAsync(string descricao);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorValorAsync(decimal valor);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorValorMultasAsync(decimal valorMultas);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorValorJurosAsync(decimal valorJuros);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorValorTotalAsync(decimal valorTotal);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorDataVencimentoAsync(DateTime dataVencimento);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorDataPagamentoAsync(DateTime dataPagamento);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorPagoAsync(bool pago);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorEmpresaAsync(Empresa empresa);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorPropriedadeAsync(Propriedade propriedade);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorCidadaoAsync(Cidadao cidadao);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorFamiliaAsync(Familia familia);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorReclamacaoAsync(Reclamacao reclamacao);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorStatusAsync(string status);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorObservacaoAsync(string observacao);
-    Task<IEnumerable<ServicoMunicipal>> ObterServicosMunicipaisPorTipoAsync(string tipo);
-    Task<ServicoMunicipal> AdicionarServicoMunicipalAsync(ServicoMunicipal servicoMunicipal);
-    Task<ServicoMunicipal> AtualizarServicoMunicipalAsync(ServicoMunicipal servicoMunicipal);
-    Task<ServicoMunicipal> RemoverServicoMunicipalAsync(ServicoMunicipal servicoMunicipal);
+    Task<ServicoMunicipalDto> AdicionarServicoMunicipalAsync(ServicoMunicipalDto servicoMunicipalDto);
+    Task<ServicoMunicipalDto> AtualizarServicoMunicipalAsync(ServicoMunicipalDto servicoMunicipalDto);
+    Task<ServicoMunicipalDto> RemoverServicoMunicipalAsync(ServicoMunicipalDto servicoMunicipalDto);
+    Task<ServicoMunicipalDto> ObterServicoMunicipalPorIdAsync(Guid id);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisAsync();
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorNomeAsync(string nome);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorDescricaoAsync(string descricao);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorValorAsync(decimal valor);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorValorMultasAsync(decimal valorMultas);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorValorJurosAsync(decimal valorJuros);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorValorTotalAsync(decimal valorTotal);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorDataVencimentoAsync(DateTime dataVencimento);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorDataPagamentoAsync(DateTime dataPagamento);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorPagoAsync(bool pago);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorEmpresaAsync(EmpresaDto empresaDto);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorPropriedadeAsync(PropriedadeDto propriedadeDto);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorCidadaoAsync(CidadaoDto cidadaoDto);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorFamiliaAsync(FamiliaDto familiaDto);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorReclamacaoAsync(ReclamacaoDto reclamacaoDto);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorStatusAsync(string status);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorObservacaoAsync(string observacao);
+    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorTipoAsync(string tipo);
 }

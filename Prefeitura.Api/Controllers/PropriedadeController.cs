@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Prefeitura.Api.Interfaces;
-using Prefeitura.Core.Entities;
+using Prefeitura.Core.DTOs;
 
 namespace Prefeitura.Api.Controllers;
 
@@ -65,7 +65,7 @@ public class PropriedadeController : BaseController
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Create([FromBody] Propriedade propriedade)
+    public async Task<IActionResult> Create([FromBody] PropriedadeDto propriedade)
     {
         try
         {
@@ -85,7 +85,7 @@ public class PropriedadeController : BaseController
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-    public async Task<IActionResult> Update(Guid id, [FromBody] Propriedade propriedade)
+    public async Task<IActionResult> Update(Guid id, [FromBody] PropriedadeDto propriedade)
     {
         try
         {

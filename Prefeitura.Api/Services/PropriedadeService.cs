@@ -1,4 +1,6 @@
-﻿using Prefeitura.Api.Interfaces;
+﻿using AutoMapper;
+using Prefeitura.Api.Interfaces;
+using Prefeitura.Core.DTOs;
 using Prefeitura.Core.Entities;
 using Prefeitura.Core.Repositories;
 using Prefeitura.Core.ValueObjects;
@@ -8,59 +10,75 @@ namespace Prefeitura.Api.Services;
 public class PropriedadeService : IPropriedadeService
 {
     private readonly IPropriedadeRepository _propriedadeRepository;
+    private readonly IMapper _mapper;
 
-    public PropriedadeService(IPropriedadeRepository propriedadeRepository)
+    public PropriedadeService(IPropriedadeRepository propriedadeRepository, IMapper mapper)
     {
         _propriedadeRepository = propriedadeRepository;
+        _mapper = mapper;
     }
 
-    public async Task<Propriedade> AdicionarPropriedadeAsync(Propriedade propriedade)
+    public async Task<PropriedadeDto> AdicionarPropriedadeAsync(PropriedadeDto propriedadeDto)
     {
-        return await _propriedadeRepository.Adicionar(propriedade);
+        var propriedade = _mapper.Map<Propriedade>(propriedadeDto);
+        var resultado = await _propriedadeRepository.Adicionar(propriedade);
+        return _mapper.Map<PropriedadeDto>(resultado);
     }
 
-    public async Task<Propriedade> AtualizarPropriedadeAsync(Propriedade propriedade)
+    public async Task<PropriedadeDto> AtualizarPropriedadeAsync(PropriedadeDto propriedadeDto)
     {
-        return await _propriedadeRepository.Atualizar(propriedade);
+        var propriedade = _mapper.Map<Propriedade>(propriedadeDto);
+        var resultado = await _propriedadeRepository.Atualizar(propriedade);
+        return _mapper.Map<PropriedadeDto>(resultado);
     }
 
-    public async Task<Propriedade> RemoverPropriedadeAsync(Propriedade propriedade)
+    public async Task<PropriedadeDto> RemoverPropriedadeAsync(PropriedadeDto propriedadeDto)
     {
-        return await _propriedadeRepository.Remover(propriedade);
+        var propriedade = _mapper.Map<Propriedade>(propriedadeDto);
+        var resultado = await _propriedadeRepository.Remover(propriedade);
+        return _mapper.Map<PropriedadeDto>(resultado);
     }
 
-    public async Task<Propriedade> ObterPorIdAsync(Guid id)
+    public async Task<PropriedadeDto> ObterPorIdAsync(Guid id)
     {
-        return await _propriedadeRepository.ObterPorIdAsync(id);
+        var propriedade = await _propriedadeRepository.ObterPorIdAsync(id);
+        return _mapper.Map<PropriedadeDto>(propriedade);
     }
 
-    public async Task<IEnumerable<Propriedade>> ObterPorCepAsync(string cep)
+    public async Task<IEnumerable<PropriedadeDto>> ObterPorCepAsync(string cep)
     {
-        return await _propriedadeRepository.ObterPorCepAsync(cep);
+        var propriedade = await _propriedadeRepository.ObterPorCepAsync(cep);
+        return _mapper.Map<IEnumerable<PropriedadeDto>>(propriedade);
     }
 
-    public async Task<IEnumerable<Propriedade>> ObterPorDescricaoAsync(string descricao)
+    public async Task<IEnumerable<PropriedadeDto>> ObterPorDescricaoAsync(string descricao)
     {
-        return await _propriedadeRepository.ObterPorDescricaoAsync(descricao);
+        var propriedade = await _propriedadeRepository.ObterPorDescricaoAsync(descricao);
+        return _mapper.Map<IEnumerable<PropriedadeDto>>(propriedade);
     }
 
-    public async Task<IEnumerable<Propriedade>> ObterPorEnderecoAsync(Endereco endereco)
+    public async Task<IEnumerable<PropriedadeDto>> ObterPorEnderecoAsync(EnderecoDto enderecoDto)
     {
-        return await _propriedadeRepository.ObterPorEnderecoAsync(endereco);
+        var endereco = _mapper.Map<Endereco>(enderecoDto);
+        var propriedade = await _propriedadeRepository.ObterPorEnderecoAsync(endereco);
+        return _mapper.Map<IEnumerable<PropriedadeDto>>(propriedade);
     }
 
-    public async Task<IEnumerable<Propriedade>> ObterPorNomeAsync(string nome)
+    public async Task<IEnumerable<PropriedadeDto>> ObterPorNomeAsync(string nome)
     {
-        return await _propriedadeRepository.ObterPorNomeAsync(nome);
+        var propriedade = await _propriedadeRepository.ObterPorNomeAsync(nome);
+        return _mapper.Map<IEnumerable<PropriedadeDto>>(propriedade);
     }
 
-    public async Task<IEnumerable<Propriedade>> ObterPorValorAvaliadoAsync(decimal valorAvaliado)
+    public async Task<IEnumerable<PropriedadeDto>> ObterPorValorAvaliadoAsync(decimal valorAvaliado)
     {
-        return await _propriedadeRepository.ObterPorValorAvaliadoAsync(valorAvaliado);
+        var propriedade = await _propriedadeRepository.ObterPorValorAvaliadoAsync(valorAvaliado);
+        return _mapper.Map<IEnumerable<PropriedadeDto>>(propriedade);
     }
 
-    public async Task<IEnumerable<Propriedade>> ObterTodosAsync()
+    public async Task<IEnumerable<PropriedadeDto>> ObterTodosAsync()
     {
-        return await _propriedadeRepository.ObterTodosAsync();
+        var propriedades = await _propriedadeRepository.ObterTodosAsync();
+        return _mapper.Map<IEnumerable<PropriedadeDto>>(propriedades);
     }
 }

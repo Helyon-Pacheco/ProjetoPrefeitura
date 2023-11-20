@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Prefeitura.Api.Interfaces;
 using Prefeitura.Api.Services;
 using Prefeitura.Core.Repositories;
@@ -13,12 +14,20 @@ Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateLogger();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Host.UseSerilog(); // Use Serilog como o provedor de logging
-
-var app = builder.Build();
-
 builder.Services.AddDbContext<PrefeituraContext>(options =>
-    options.UseSqlServer("YourConnectionStringHere"));
+    options.UseSqlServer(connectionString));
+
+// Adicionando o Swagger
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Prefeitura API", Version = "v1" });
+});
+
+// Adiciona o AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<ICidadaoRepository, CidadaoRepository>();
 builder.Services.AddScoped<ICidadaoService, CidadaoService>();
@@ -34,14 +43,19 @@ builder.Services.AddScoped<IServicoMunicipalService, ServicoMunicipalService>();
 builder.Services.AddControllers();
 builder.Services.AddRazorPages();
 
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
+    //app.UseSwagger();
+    //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Prefeitura API v1"));
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Prefeitura API v1"));
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

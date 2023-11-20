@@ -1,23 +1,22 @@
-﻿using Prefeitura.Core.Entities;
-using Prefeitura.Core.ValueObjects;
+﻿using Prefeitura.Core.DTOs;
 
 namespace Prefeitura.Api.Interfaces;
 
 public interface IEmpresaService
 {
-    Task<Empresa> ObterEmpresaPorId(Guid id);
-    Task<IEnumerable<Empresa>> ObterEmpresas();
-    Task<IEnumerable<Empresa>> ObterEmpresaPorCnpj(string cnpj);
-    Task<IEnumerable<Empresa>> ObterEmpresaPorInscricaoEstadual(string inscricaoEstadual);
-    Task<IEnumerable<Empresa>> ObterEmpresaPorInscricaoMunicipal(string inscricaoMunicipal);
-    Task<IEnumerable<Empresa>> ObterEmpresasPorNome(string nome);
-    Task<IEnumerable<Empresa>> ObterEmpresasPorTelefone(string telefone);
-    Task<IEnumerable<Empresa>> ObterEmpresasPorEmail(string email);
-    Task<IEnumerable<Empresa>> ObterEmpresasPorResponsavel(string responsavel);
-    Task<IEnumerable<Empresa>> ObterEmpresasPorTelefoneResponsavel(string telefoneResponsavel);
-    Task<IEnumerable<Empresa>> ObterEmpresasPorEmailResponsavel(string emailResponsavel);
-    Task<IEnumerable<Empresa>> ObterEmpresasPorEndereco(Endereco endereco);
-    Task<Empresa> AdicionarEmpresa(Empresa empresa);
-    Task<Empresa> AtualizarEmpresa(Empresa empresa);
-    Task<Empresa> RemoverEmpresa(Empresa empresa);
+    Task<EmpresaDto> ObterEmpresaPorId(Guid id);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresas();
+    Task<IEnumerable<EmpresaDto>> ObterEmpresaPorCnpj(string cnpj);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresaPorInscricaoEstadual(string inscricaoEstadual);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresaPorInscricaoMunicipal(string inscricaoMunicipal);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresasPorNome(string nome);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresasPorTelefone(string telefone);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresasPorEmail(string email);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresasPorResponsavel(string responsavel);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresasPorTelefoneResponsavel(string telefoneResponsavel);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresasPorEmailResponsavel(string emailResponsavel);
+    Task<IEnumerable<EmpresaDto>> ObterEmpresasPorEndereco(EnderecoDto enderecoDto);
+    Task<EmpresaDto> AdicionarEmpresa(EmpresaDto empresaDto);
+    Task<EmpresaDto> AtualizarEmpresa(EmpresaDto empresaDto);
+    Task<EmpresaDto> RemoverEmpresa(EmpresaDto empresaDto);
 }

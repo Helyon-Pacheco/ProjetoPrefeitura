@@ -1,24 +1,23 @@
-﻿using Prefeitura.Core.Entities;
-using Prefeitura.Core.ValueObjects;
+﻿using Prefeitura.Core.DTOs;
 
 namespace Prefeitura.Api.Interfaces;
 
 public interface IReclamacaoService
 {
-    Task<Reclamacao> ObterPorIdAsync(Guid id);
-    Task<IEnumerable<Reclamacao>> ObterTodosAsync();
-    Task<IEnumerable<Reclamacao>> ObterPorDescricaoAsync(string descricao);
-    Task<IEnumerable<Reclamacao>> ObterPorDataAsync(DateTime data);
-    Task<IEnumerable<Reclamacao>> ObterPorStatusAsync(string status);
-    Task<IEnumerable<Reclamacao>> ObterPorObservacaoAsync(string observacao);
-    Task<IEnumerable<Reclamacao>> ObterPorTipoAsync(string tipo);
-    Task<IEnumerable<Reclamacao>> ObterPorTipoReclamacaoAsync(string tipoReclamacao);
-    Task<IEnumerable<Reclamacao>> ObterPorTipoSolicitacaoAsync(string tipoSolicitacao);
-    Task<IEnumerable<Reclamacao>> ObterPorTipoServicoAsync(string tipoServico);
-    Task<IEnumerable<Reclamacao>> ObterPorTipoOcorrenciaAsync(string tipoOcorrencia);
-    Task<IEnumerable<Reclamacao>> ObterPorTipoSolicitanteAsync(string tipoSolicitante);
-    Task<IEnumerable<Reclamacao>> ObterPorTipoEnderecoAsync(Endereco tipoEndereco);
-    Task<Reclamacao> AdicionarReclamacaoAsync(Reclamacao reclamacao);
-    Task<Reclamacao> AtualizarReclamacaoAsync(Reclamacao reclamacao);
-    Task<Reclamacao> RemoverReclamacaoAsync(Reclamacao reclamacao);
+    Task<ReclamacaoDto> AdicionarReclamacaoAsync(ReclamacaoDto reclamacaoDto);
+    Task<ReclamacaoDto> AtualizarReclamacaoAsync(ReclamacaoDto reclamacaoDto);
+    Task<ReclamacaoDto> RemoverReclamacaoAsync(ReclamacaoDto reclamacaoDto);
+    Task<ReclamacaoDto> ObterPorIdAsync(Guid id);
+    Task<IEnumerable<ReclamacaoDto>> ObterTodosAsync();
+    Task<IEnumerable<ReclamacaoDto>> ObterPorDescricaoAsync(string descricao);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorDataAsync(DateTime data);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorStatusAsync(string status);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorObservacaoAsync(string observacao);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorTipoAsync(string tipo);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorTipoReclamacaoAsync(string tipoReclamacao);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorTipoSolicitacaoAsync(string tipoSolicitacao);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorTipoServicoAsync(string tipoServico);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorTipoOcorrenciaAsync(string tipoOcorrencia);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorTipoSolicitanteAsync(string tipoSolicitante);
+    Task<IEnumerable<ReclamacaoDto>> ObterPorTipoEnderecoAsync(EnderecoDto tipoEnderecoDto);
 }

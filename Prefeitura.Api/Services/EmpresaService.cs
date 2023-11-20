@@ -1,4 +1,6 @@
-﻿using Prefeitura.Api.Interfaces;
+﻿using AutoMapper;
+using Prefeitura.Api.Interfaces;
+using Prefeitura.Core.DTOs;
 using Prefeitura.Core.Entities;
 using Prefeitura.Core.Repositories;
 using Prefeitura.Core.ValueObjects;
@@ -8,84 +10,105 @@ namespace Prefeitura.Api.Services;
 public class EmpresaService : IEmpresaService
 {
     private readonly IEmpresaRepository _empresaRepository;
+    private readonly IMapper _mapper;
 
-    public EmpresaService(IEmpresaRepository empresaRepository)
+    public EmpresaService(IEmpresaRepository empresaRepository, IMapper mapper)
     {
         _empresaRepository = empresaRepository;
+        _mapper = mapper;
     }
 
-    public async Task<Empresa> AdicionarEmpresa(Empresa empresa)
+    public async Task<EmpresaDto> AdicionarEmpresa(EmpresaDto empresaDto)
     {
-        return await _empresaRepository.Adicionar(empresa);
+        var empresa = _mapper.Map<Empresa>(empresaDto);
+        var resultado = await _empresaRepository.Adicionar(empresa);
+        return _mapper.Map<EmpresaDto>(resultado);
     }
 
-    public async Task<Empresa> AtualizarEmpresa(Empresa empresa)
+    public async Task<EmpresaDto> AtualizarEmpresa(EmpresaDto empresaDto)
     {
-        return await _empresaRepository.Atualizar(empresa);
+        var empresa = _mapper.Map<Empresa>(empresaDto);
+        var resultado = await _empresaRepository.Atualizar(empresa);
+        return _mapper.Map<EmpresaDto>(resultado);
     }
 
-    public async Task<Empresa> RemoverEmpresa(Empresa empresa)
+    public async Task<EmpresaDto> RemoverEmpresa(EmpresaDto empresaDto)
     {
-        return await _empresaRepository.Remover(empresa);
+        var empresa = _mapper.Map<Empresa>(empresaDto);
+        var resultado = await _empresaRepository.Remover(empresa);
+        return _mapper.Map<EmpresaDto>(resultado);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresaPorCnpj(string cnpj)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresaPorCnpj(string cnpj)
     {
-        return await _empresaRepository.ObterPorCnpjAsync(cnpj);
+        var empresa = await _empresaRepository.ObterPorCnpjAsync(cnpj);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 
-    public async Task<Empresa> ObterEmpresaPorId(Guid id)
+    public async Task<EmpresaDto> ObterEmpresaPorId(Guid id)
     {
-        return await _empresaRepository.ObterPorIdAsync(id);
+        var empresa = await _empresaRepository.ObterPorIdAsync(id);
+        return _mapper.Map<EmpresaDto>(empresa);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresaPorInscricaoEstadual(string inscricaoEstadual)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresaPorInscricaoEstadual(string inscricaoEstadual)
     {
-        return await _empresaRepository.ObterPorInscricaoEstadualAsync(inscricaoEstadual);
+        var empresa = await _empresaRepository.ObterPorInscricaoEstadualAsync(inscricaoEstadual);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresaPorInscricaoMunicipal(string inscricaoMunicipal)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresaPorInscricaoMunicipal(string inscricaoMunicipal)
     {
-        return await _empresaRepository.ObterPorInscricaoMunicipalAsync(inscricaoMunicipal);
+        var empresa = await _empresaRepository.ObterPorInscricaoMunicipalAsync(inscricaoMunicipal);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresas()
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresas()
     {
-        return await _empresaRepository.ObterTodosAsync();
+        var empresas = await _empresaRepository.ObterTodosAsync();
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresas);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresasPorEmail(string email)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresasPorEmail(string email)
     {
-        return await _empresaRepository.ObterPorEmailAsync(email);
+        var empresa = await _empresaRepository.ObterPorEmailAsync(email);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresasPorEmailResponsavel(string emailResponsavel)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresasPorEmailResponsavel(string emailResponsavel)
     {
-        return await _empresaRepository.ObterPorEmailResponsavelAsync(emailResponsavel);
+        var empresa = await _empresaRepository.ObterPorEmailResponsavelAsync(emailResponsavel);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresasPorEndereco(Endereco endereco)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresasPorEndereco(EnderecoDto enderecoDto)
     {
-        return await _empresaRepository.ObterPorEnderecoAsync(endereco);
+        var endereco = _mapper.Map<Endereco>(enderecoDto);
+        var empresa = await _empresaRepository.ObterPorEnderecoAsync(endereco);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresasPorNome(string nome)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresasPorNome(string nome)
     {
-        return await _empresaRepository.ObterPorNomeAsync(nome);
+        var empresa = await _empresaRepository.ObterPorNomeAsync(nome);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresasPorResponsavel(string responsavel)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresasPorResponsavel(string responsavel)
     {
-        return await _empresaRepository.ObterPorResponsavelAsync(responsavel);
+        var empresa = await _empresaRepository.ObterPorResponsavelAsync(responsavel);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresasPorTelefone(string telefone)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresasPorTelefone(string telefone)
     {
-        return await _empresaRepository.ObterPorTelefoneAsync(telefone);
+        var empresa = await _empresaRepository.ObterPorTelefoneAsync(telefone);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 
-    public async Task<IEnumerable<Empresa>> ObterEmpresasPorTelefoneResponsavel(string telefoneResponsavel)
+    public async Task<IEnumerable<EmpresaDto>> ObterEmpresasPorTelefoneResponsavel(string telefoneResponsavel)
     {
-        return await _empresaRepository.ObterPorTelefoneResponsavelAsync(telefoneResponsavel);
+        var empresa = await _empresaRepository.ObterPorTelefoneResponsavelAsync(telefoneResponsavel);
+        return _mapper.Map<IEnumerable<EmpresaDto>>(empresa);
     }
 }
