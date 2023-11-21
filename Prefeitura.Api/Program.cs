@@ -18,7 +18,14 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 builder.Host.UseSerilog(); // Use Serilog como o provedor de logging
 builder.Services.AddDbContext<PrefeituraContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString,
+        sqlServerOptionsAction: sqlOptions =>
+        {
+            sqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(30),
+                errorNumbersToAdd: null);
+        }));
 
 // Adicionando o Swagger
 builder.Services.AddSwaggerGen(c =>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Prefeitura.Core.Aggregates;
 using Prefeitura.Core.Entities;
 using Prefeitura.Core.ValueObjects;
@@ -27,5 +28,26 @@ public class PrefeituraContext : DbContext
         modelBuilder.ApplyConfiguration(new EmpresaMapping());
         modelBuilder.ApplyConfiguration(new ServicoMunicipalMapping());
         modelBuilder.ApplyConfiguration(new ReclamacaoMapping());
+    }
+}
+
+public class PrefeituraContextFactory : IDesignTimeDbContextFactory<PrefeituraContext>
+{
+    public PrefeituraContext CreateDbContext(string[] args)
+    {
+        // Constrói o caminho para o diretório do projeto
+        var basePath = Directory.GetCurrentDirectory() + string.Format("{0}..{0}Prefeitura.Api", Path.DirectorySeparatorChar);
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(basePath)
+            .AddJsonFile("appsettings.json")
+            .Build();
+
+        // Obtém a string de conexão
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        var optionsBuilder = new DbContextOptionsBuilder<PrefeituraContext>();
+        optionsBuilder.UseSqlServer(connectionString);
+
+        return new PrefeituraContext(optionsBuilder.Options);
     }
 }

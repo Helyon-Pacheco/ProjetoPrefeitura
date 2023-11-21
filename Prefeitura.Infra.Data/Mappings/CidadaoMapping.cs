@@ -14,17 +14,23 @@ public class CidadaoMapping : IEntityTypeConfiguration<Cidadao>
         builder.Property(c => c.DataNascimento).IsRequired();
         builder.Property(c => c.Email).IsRequired().HasMaxLength(100);
         builder.Property(c => c.Telefone).IsRequired().HasMaxLength(11);
-        builder.Property(c => c.DataAtualizacao).IsRequired();
+        builder.Property(c => c.DataAtualizacao).IsRequired(false); // Se for opcional
         builder.Property(c => c.DataCriacao).IsRequired();
         builder.Property(c => c.Ativo).IsRequired();
-        builder.OwnsOne(c => c.Endereco, cm =>
+
+        builder.OwnsOne(c => c.Endereco, endereco =>
         {
-            cm.Property(c => c.Logradouro).IsRequired().HasMaxLength(100);
-            cm.Property(c => c.Numero).IsRequired().HasMaxLength(10);
-            cm.Property(c => c.Complemento).HasMaxLength(100);
-            cm.Property(c => c.Bairro).IsRequired().HasMaxLength(100);
-            cm.Property(c => c.Cidade).IsRequired().HasMaxLength(100);
-            cm.Property(c => c.Estado).IsRequired().HasMaxLength(2);
+            endereco.Property(e => e.Logradouro).IsRequired().HasMaxLength(100);
+            endereco.Property(e => e.Numero).IsRequired().HasMaxLength(10);
+            endereco.Property(e => e.Complemento).HasMaxLength(100);
+            endereco.Property(e => e.Bairro).IsRequired().HasMaxLength(100);
+            endereco.Property(e => e.Cidade).IsRequired().HasMaxLength(100);
+            endereco.Property(e => e.Estado).IsRequired().HasMaxLength(2);
         });
+
+        builder.HasOne(c => c.Familia)
+               .WithMany(f => f.Membros)
+               .HasForeignKey(c => c.FamiliaId)
+               .OnDelete(DeleteBehavior.Restrict); // Evita exclusão em cascata
     }
 }
