@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Prefeitura.Core.Aggregates;
 using Prefeitura.Core.Entities;
 using Prefeitura.Core.Repositories;
 using Prefeitura.Infra.Data.Context;
@@ -18,7 +17,7 @@ public class ServicoMunicipalRepository : IServicoMunicipalRepository
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorCidadaoAsync(Cidadao cidadao)
     {
-        return await _context.Servicos.Where(s => s.Cidadao == cidadao).ToListAsync();
+        return await _context.Servicos.Where(s => s.EmpresaId == cidadao.Id).ToListAsync();
     }
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorDataPagamentoAsync(DateTime dataPagamento)
@@ -38,12 +37,7 @@ public class ServicoMunicipalRepository : IServicoMunicipalRepository
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorEmpresaAsync(Empresa empresa)
     {
-        return await _context.Servicos.Where(s => s.Empresa == empresa).ToListAsync();
-    }
-
-    public async Task<IEnumerable<ServicoMunicipal>> ObterPorFamiliaAsync(Familia familia)
-    {
-        return await _context.Servicos.Where(s => s.Familia == familia).ToListAsync();
+        return await _context.Servicos.Where(s => s.EmpresaId == empresa.Id).ToListAsync();
     }
 
     public async Task<ServicoMunicipal> ObterPorIdAsync(Guid id)
@@ -63,12 +57,12 @@ public class ServicoMunicipalRepository : IServicoMunicipalRepository
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorPropriedadeAsync(Propriedade propriedade)
     {
-        return await _context.Servicos.Where(s => s.Propriedade == propriedade).ToListAsync();
+        return await _context.Servicos.Where(s => s.EmpresaId == propriedade.Id).ToListAsync();
     }
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorReclamacaoAsync(Reclamacao reclamacao)
     {
-        return await _context.Servicos.Where(s => s.Reclamacao == reclamacao).ToListAsync();
+        return await _context.Servicos.Where(s => s.EmpresaId == reclamacao.Id).ToListAsync();
     }
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorValorAsync(decimal valor)

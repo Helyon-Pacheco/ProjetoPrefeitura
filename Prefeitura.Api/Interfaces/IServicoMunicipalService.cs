@@ -21,7 +21,6 @@ public interface IServicoMunicipalService
     Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorEmpresaAsync(EmpresaDto empresaDto);
     Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorPropriedadeAsync(PropriedadeDto propriedadeDto);
     Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorCidadaoAsync(CidadaoDto cidadaoDto);
-    Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorFamiliaAsync(FamiliaDto familiaDto);
     Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorReclamacaoAsync(ReclamacaoDto reclamacaoDto);
     Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorStatusAsync(string status);
     Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorObservacaoAsync(string observacao);

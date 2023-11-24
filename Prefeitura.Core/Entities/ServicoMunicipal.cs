@@ -1,6 +1,4 @@
-﻿using Prefeitura.Core.Aggregates;
-
-namespace Prefeitura.Core.Entities;
+﻿namespace Prefeitura.Core.Entities;
 
 public class ServicoMunicipal
 {
@@ -14,11 +12,10 @@ public class ServicoMunicipal
     public DateTime DataVencimento { get; private set; }
     public DateTime DataPagamento { get; private set; }
     public bool Pago { get; private set; }
-    public Empresa Empresa { get; private set; }
-    public Propriedade Propriedade { get; private set; }
-    public Cidadao Cidadao { get; private set; }
-    public Familia Familia { get; private set; }
-    public Reclamacao Reclamacao { get; private set; }
+    public Guid EmpresaId { get; private set; }
+    public Guid PropriedadeId { get; private set; }
+    public Guid CidadaoId { get; private set; }
+    public Guid ReclamacaoId { get; private set; }
     public string Status { get; private set; }
     public string Observacao { get; private set; }
     public string Tipo { get; private set; }

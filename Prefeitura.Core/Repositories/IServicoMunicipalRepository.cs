@@ -1,5 +1,4 @@
-﻿using Prefeitura.Core.Aggregates;
-using Prefeitura.Core.Entities;
+﻿using Prefeitura.Core.Entities;
 
 namespace Prefeitura.Core.Repositories;
 
@@ -19,7 +18,6 @@ public interface IServicoMunicipalRepository
     Task<IEnumerable<ServicoMunicipal>> ObterPorEmpresaAsync(Empresa empresa);
     Task<IEnumerable<ServicoMunicipal>> ObterPorPropriedadeAsync(Propriedade propriedade);
     Task<IEnumerable<ServicoMunicipal>> ObterPorCidadaoAsync(Cidadao cidadao);
-    Task<IEnumerable<ServicoMunicipal>> ObterPorFamiliaAsync(Familia familia);
     Task<IEnumerable<ServicoMunicipal>> ObterPorReclamacaoAsync(Reclamacao reclamacao);
     Task<IEnumerable<ServicoMunicipal>> ObterPorStatusAsync(string status);
     Task<IEnumerable<ServicoMunicipal>> ObterPorObservacaoAsync(string observacao);

@@ -18,7 +18,6 @@ public class CidadaoRepository : ICidadaoRepository
     {
         return await _context.Cidadaos
             .Include(c => c.Endereco)
-            .Include(c => c.Familia)
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
@@ -26,7 +25,6 @@ public class CidadaoRepository : ICidadaoRepository
     {
         return await _context.Cidadaos
             .Include(c => c.Endereco)
-            .Include(c => c.Familia)
             .FirstOrDefaultAsync(c => c.Cpf == cpf);
     }
 
@@ -34,7 +32,6 @@ public class CidadaoRepository : ICidadaoRepository
     {
         return await _context.Cidadaos
             .Include(c => c.Endereco)
-            .Include(c => c.Familia)
             .FirstOrDefaultAsync(c => c.Email == email);
     }
 
@@ -42,7 +39,6 @@ public class CidadaoRepository : ICidadaoRepository
     {
         return await _context.Cidadaos
             .Include(c => c.Endereco)
-            .Include(c => c.Familia)
             .ToListAsync();
     }
 
@@ -50,7 +46,6 @@ public class CidadaoRepository : ICidadaoRepository
     {
         return await _context.Cidadaos
             .Include(c => c.Endereco)
-            .Include(c => c.Familia)
             .Where(c => c.Ativo)
             .ToListAsync();
     }
@@ -59,35 +54,7 @@ public class CidadaoRepository : ICidadaoRepository
     {
         return await _context.Cidadaos
             .Include(c => c.Endereco)
-            .Include(c => c.Familia)
             .Where(c => !c.Ativo)
-            .ToListAsync();
-    }
-
-    public async Task<IEnumerable<Cidadao>> ObterTodosPorFamiliaAsync(Guid familiaId)
-    {
-        return await _context.Cidadaos
-            .Include(c => c.Endereco)
-            .Include(c => c.Familia)
-            .Where(c => c.FamiliaId == familiaId)
-            .ToListAsync();
-    }
-
-    public async Task<IEnumerable<Cidadao>> ObterTodosAtivosPorFamiliaAsync(Guid familiaId)
-    {
-        return await _context.Cidadaos
-            .Include(c => c.Endereco)
-            .Include(c => c.Familia)
-            .Where(c => c.FamiliaId == familiaId && c.Ativo)
-            .ToListAsync();
-    }
-
-    public async Task<IEnumerable<Cidadao>> ObterTodosInativosPorFamiliaAsync(Guid familiaId)
-    {
-        return await _context.Cidadaos
-            .Include(c => c.Endereco)
-            .Include(c => c.Familia)
-            .Where(c => c.FamiliaId == familiaId && !c.Ativo)
             .ToListAsync();
     }
 

@@ -27,10 +27,5 @@ public class CidadaoMapping : IEntityTypeConfiguration<Cidadao>
             endereco.Property(e => e.Cidade).IsRequired().HasMaxLength(100);
             endereco.Property(e => e.Estado).IsRequired().HasMaxLength(2);
         });
-
-        builder.HasOne(c => c.Familia)
-               .WithMany(f => f.Membros)
-               .HasForeignKey(c => c.FamiliaId)
-               .OnDelete(DeleteBehavior.Restrict); // Evita exclusão em cascata
     }
 }

@@ -1,5 +1,4 @@
-﻿using Prefeitura.Core.Aggregates;
-using Prefeitura.Core.ValueObjects;
+﻿using Prefeitura.Core.ValueObjects;
 
 namespace Prefeitura.Core.Entities;
 
@@ -12,8 +11,6 @@ public class Cidadao
     public string Email { get; private set; }
     public string Telefone { get; private set; }
     public Endereco Endereco { get; private set; }
-    public Familia Familia { get; private set; }
-    public Guid FamiliaId { get; private set; }
     public bool Ativo { get; private set; }
     public DateTime DataCriacao { get; private set; }
     public DateTime? DataAtualizacao { get; private set; }
@@ -21,7 +18,7 @@ public class Cidadao
     // Construtor privado para o Entity Framework
     private Cidadao() { }
 
-    public Cidadao(string nome, string cpf, DateTime dataNascimento, string email, Endereco endereco, Familia familia)
+    public Cidadao(string nome, string cpf, DateTime dataNascimento, string email, Endereco endereco)
     {
         Id = Guid.NewGuid();
         Nome = nome;
@@ -29,19 +26,17 @@ public class Cidadao
         DataNascimento = dataNascimento;
         Email = email;
         Endereco = endereco;
-        Familia = familia;
         Ativo = true;
         DataCriacao = DateTime.Now;
     }
 
-    public void Atualizar(string nome, string cpf, DateTime dataNascimento, string email, Endereco endereco, Familia familia)
+    public void Atualizar(string nome, string cpf, DateTime dataNascimento, string email, Endereco endereco)
     {
         Nome = nome;
         Cpf = cpf;
         DataNascimento = dataNascimento;
         Email = email;
         Endereco = endereco;
-        Familia = familia;
         DataAtualizacao = DateTime.Now;
     }
 
@@ -60,12 +55,6 @@ public class Cidadao
     public void AlterarEndereco(Endereco endereco)
     {
         Endereco = endereco;
-        DataAtualizacao = DateTime.Now;
-    }
-
-    public void AlterarFamilia(Familia familia)
-    {
-        Familia = familia;
         DataAtualizacao = DateTime.Now;
     }
 }

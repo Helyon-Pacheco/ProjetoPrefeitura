@@ -10,9 +10,6 @@ public interface ICidadaoRepository
     Task<IEnumerable<Cidadao>> ObterTodosAsync();
     Task<IEnumerable<Cidadao>> ObterTodosAtivosAsync();
     Task<IEnumerable<Cidadao>> ObterTodosInativosAsync();
-    Task<IEnumerable<Cidadao>> ObterTodosPorFamiliaAsync(Guid familiaId);
-    Task<IEnumerable<Cidadao>> ObterTodosAtivosPorFamiliaAsync(Guid familiaId);
-    Task<IEnumerable<Cidadao>> ObterTodosInativosPorFamiliaAsync(Guid familiaId);
     Task<Cidadao> Adicionar(Cidadao cidadao);
     Task<Cidadao> Atualizar(Cidadao cidadao);
     Task<Cidadao> Remover(Cidadao cidadao);

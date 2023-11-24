@@ -62,12 +62,6 @@ public class CidadaoService : ICidadaoService
         return _mapper.Map<CidadaoDto>(cidadao);
     }
 
-    public async Task<IEnumerable<CidadaoDto>> ObterCidadaosPorFamilia(Guid familiaId)
-    {
-        var cidadao = await _cidadaoRepository.ObterTodosPorFamiliaAsync(familiaId);
-        return _mapper.Map<IEnumerable<CidadaoDto>>(cidadao);
-    }
-
     public async Task<IEnumerable<CidadaoDto>> ObterCidadaosAtivosAsync()
     {
         var cidadao = await _cidadaoRepository.ObterTodosAtivosAsync();

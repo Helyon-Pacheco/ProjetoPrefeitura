@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Prefeitura.Core.Aggregates;
 using Prefeitura.Core.Entities;
 using Prefeitura.Core.ValueObjects;
 using Prefeitura.Infra.Data.Mappings;
@@ -11,11 +10,10 @@ public class PrefeituraContext : DbContext
 {
     public DbSet<Cidadao> Cidadaos { get; set; }
     public DbSet<Endereco> Enderecos { get; set; }
-    public DbSet<Propriedade> Propriedades { get; set;}
+    public DbSet<Propriedade> Propriedades { get; set; }
     public DbSet<Empresa> Empresas { get; set; }
-    public DbSet<Familia> Familias { get; set; }
     public DbSet<ServicoMunicipal> Servicos { get; set; }
-    public DbSet<Reclamacao> Reclamacoes { get; set;}
+    public DbSet<Reclamacao> Reclamacoes { get; set; }
 
     public PrefeituraContext(DbContextOptions<PrefeituraContext> options) : base(options)
     {

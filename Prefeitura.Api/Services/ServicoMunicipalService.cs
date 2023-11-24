@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Prefeitura.Api.Interfaces;
-using Prefeitura.Core.Aggregates;
 using Prefeitura.Core.DTOs;
 using Prefeitura.Core.Entities;
 using Prefeitura.Core.Repositories;
@@ -123,13 +122,6 @@ public class ServicoMunicipalService : IServicoMunicipalService
     {
         var cidadao = _mapper.Map<Cidadao>(cidadaoDto);
         var servicosMunicipais = await _servicoMunicipalRepository.ObterPorCidadaoAsync(cidadao);
-        return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
-    }
-
-    public async Task<IEnumerable<ServicoMunicipalDto>> ObterServicosMunicipaisPorFamiliaAsync(FamiliaDto familiaDto)
-    {
-        var familia = _mapper.Map<Familia>(familiaDto);
-        var servicosMunicipais = await _servicoMunicipalRepository.ObterPorFamiliaAsync(familia);
         return _mapper.Map<IEnumerable<ServicoMunicipalDto>>(servicosMunicipais);
     }
 

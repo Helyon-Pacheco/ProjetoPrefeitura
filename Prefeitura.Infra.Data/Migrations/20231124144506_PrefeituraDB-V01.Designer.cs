@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Prefeitura.Infra.Data.Context;
 
@@ -11,9 +12,11 @@ using Prefeitura.Infra.Data.Context;
 namespace Prefeitura.Infra.Data.Migrations
 {
     [DbContext(typeof(PrefeituraContext))]
-    partial class PrefeituraContextModelSnapshot : ModelSnapshot
+    [Migration("20231124144506_PrefeituraDB-V01")]
+    partial class PrefeituraDBV01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,18 +275,26 @@ namespace Prefeitura.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorJuros")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorMulta")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ValorTotal")
-                        .HasColumnType("decimal(18, 2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CidadaoId");
+
+                    b.HasIndex("EmpresaId");
+
+                    b.HasIndex("PropriedadeId");
+
+                    b.HasIndex("ReclamacaoId");
 
                     b.ToTable("Servicos");
                 });
@@ -498,6 +509,41 @@ namespace Prefeitura.Infra.Data.Migrations
 
                     b.Navigation("TipoEndereco")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Prefeitura.Core.Entities.ServicoMunicipal", b =>
+                {
+                    b.HasOne("Prefeitura.Core.Entities.Cidadao", "Cidadao")
+                        .WithMany()
+                        .HasForeignKey("CidadaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Prefeitura.Core.Entities.Empresa", "Empresa")
+                        .WithMany()
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Prefeitura.Core.Entities.Propriedade", "Propriedade")
+                        .WithMany()
+                        .HasForeignKey("PropriedadeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Prefeitura.Core.Entities.Reclamacao", "Reclamacao")
+                        .WithMany()
+                        .HasForeignKey("ReclamacaoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Cidadao");
+
+                    b.Navigation("Empresa");
+
+                    b.Navigation("Propriedade");
+
+                    b.Navigation("Reclamacao");
                 });
 #pragma warning restore 612, 618
         }

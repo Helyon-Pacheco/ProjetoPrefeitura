@@ -11,7 +11,7 @@ public class PropriedadeMapping : IEntityTypeConfiguration<Propriedade>
         builder.HasKey(c => c.Id);
         builder.Property(c => c.Nome).IsRequired().HasMaxLength(100);
         builder.Property(c => c.Descricao).IsRequired().HasMaxLength(100);
-        builder.Property(c => c.ValorAvaliado).IsRequired()/*.HasColumnType("decimal(18,2)")*/;
+        builder.Property(c => c.ValorAvaliado).IsRequired().HasColumnType("decimal(18,2)");
         builder.OwnsOne(c => c.Endereco, cm =>
         {
             cm.Property(c => c.Logradouro).IsRequired().HasMaxLength(100);

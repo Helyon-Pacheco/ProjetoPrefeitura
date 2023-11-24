@@ -11,7 +11,6 @@ public interface ICidadaoService
     Task<IEnumerable<CidadaoDto>> ObterCidadaosAsync();
     Task<CidadaoDto> ObterCidadaoPorCpfAsync(string cpf);
     Task<CidadaoDto> ObterCidadaoPorEmailAsync(string email);
-    Task<IEnumerable<CidadaoDto>> ObterCidadaosPorFamilia(Guid familiaId);
     Task<IEnumerable<CidadaoDto>> ObterCidadaosAtivosAsync();
     Task<IEnumerable<CidadaoDto>> ObterCidadaosInativosAsync();
 }

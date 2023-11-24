@@ -1,6 +1,4 @@
-﻿using System;
-using AutoMapper;
-using Prefeitura.Core.Aggregates;
+﻿using AutoMapper;
 using Prefeitura.Core.DTOs;
 using Prefeitura.Core.Entities;
 using Prefeitura.Core.ValueObjects;
@@ -16,7 +14,6 @@ public class MappingProfile : Profile
         CreateMap<Propriedade, PropriedadeDto>().ReverseMap();
         CreateMap<Reclamacao, ReclamacaoDto>().ReverseMap();
         CreateMap<ServicoMunicipal, ServicoMunicipalDto>().ReverseMap();
-        CreateMap<Familia, FamiliaDto>().ReverseMap();
         CreateMap<Endereco, EnderecoDto>().ReverseMap();
     }
 }
