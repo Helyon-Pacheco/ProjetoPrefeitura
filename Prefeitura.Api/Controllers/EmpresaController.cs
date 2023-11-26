@@ -89,13 +89,13 @@ public class EmpresaController : BaseController
     {
         try
         {
-            if (id != empresa.Id)
+            empresa.Id = id;
+            var resultado = await _empresaService.AtualizarEmpresa(empresa);
+            if (resultado == null)
             {
                 _logger.LogWarning($"Empresa com Id {id} não encontrada");
                 return BadRequest();
             }
-
-            await _empresaService.AtualizarEmpresa(empresa);
             _logger.LogInformation($"Empresa com Id {empresa.Id} atualizada");
             return NoContent();
         }

@@ -19,6 +19,7 @@ public class PropriedadeRepository : IPropriedadeRepository
     {
         return await _context.Propriedades
             .Include(p => p.Endereco)
+            .AsNoTracking()
             .FirstOrDefaultAsync(p => p.Id == id);
     }
 
@@ -78,7 +79,16 @@ public class PropriedadeRepository : IPropriedadeRepository
 
     public async Task<Propriedade> Atualizar(Propriedade propriedade)
     {
-        _context.Propriedades.Update(propriedade);
+        var propriedadeExistente = await _context.Propriedades.FirstOrDefaultAsync(p => p.Id == propriedade.Id);
+        if (propriedadeExistente != null)
+        {
+            _context.Entry(propriedadeExistente).CurrentValues.SetValues(propriedade);
+        }
+        else 
+        {
+            _context.Propriedades.Update(propriedade);
+        }
+        
         await _context.SaveChangesAsync();
         return propriedade;
     }

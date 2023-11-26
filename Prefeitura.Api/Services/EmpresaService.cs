@@ -27,6 +27,11 @@ public class EmpresaService : IEmpresaService
 
     public async Task<EmpresaDto> AtualizarEmpresa(EmpresaDto empresaDto)
     {
+        var empresaExistente = await _empresaRepository.ObterPorIdAsync(empresaDto.Id);
+        if (empresaExistente == null)
+        {
+            return null;
+        }
         var empresa = _mapper.Map<Empresa>(empresaDto);
         var resultado = await _empresaRepository.Atualizar(empresa);
         return _mapper.Map<EmpresaDto>(resultado);

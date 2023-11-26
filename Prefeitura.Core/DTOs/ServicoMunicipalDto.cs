@@ -5,7 +5,6 @@ namespace Prefeitura.Core.DTOs;
 
 public class ServicoMunicipalDto
 {
-    [ReadOnly(true)]
     public Guid Id { get; set; }
 
     [Required(ErrorMessage = "O nome é obrigatório.")]

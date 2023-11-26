@@ -26,6 +26,11 @@ public class CidadaoService : ICidadaoService
 
     public async Task<CidadaoDto> AtualizarCidadaoAsync(CidadaoDto cidadaoDto)
     {
+        var cidadaoExistente = await _cidadaoRepository.ObterPorIdAsync(cidadaoDto.Id);
+        if (cidadaoExistente == null)
+        {
+            return null;
+        }
         var cidadao = _mapper.Map<Cidadao>(cidadaoDto);
         var resultado = await _cidadaoRepository.Atualizar(cidadao);
         return _mapper.Map<CidadaoDto>(resultado);

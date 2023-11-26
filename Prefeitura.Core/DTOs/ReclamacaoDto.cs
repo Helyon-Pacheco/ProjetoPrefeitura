@@ -6,7 +6,6 @@ namespace Prefeitura.Core.DTOs;
 
 public class ReclamacaoDto
 {
-    [ReadOnly(true)]
     public Guid Id { get; set; }
 
     [Required(ErrorMessage = "A descrição é obrigatória.")]

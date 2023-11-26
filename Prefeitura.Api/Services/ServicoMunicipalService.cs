@@ -19,6 +19,11 @@ public class ServicoMunicipalService : IServicoMunicipalService
 
     public async Task<ServicoMunicipalDto> AdicionarServicoMunicipalAsync(ServicoMunicipalDto servicoMunicipalDto)
     {
+        var servicoMunicipalExistente = await _servicoMunicipalRepository.ObterPorIdAsync(servicoMunicipalDto.Id);
+        if (servicoMunicipalExistente != null)
+        {
+            return null;
+        }
         var servicoMunicipal = _mapper.Map<ServicoMunicipal>(servicoMunicipalDto);
         var resultado = await _servicoMunicipalRepository.Adicionar(servicoMunicipal);
         return _mapper.Map<ServicoMunicipalDto>(resultado);

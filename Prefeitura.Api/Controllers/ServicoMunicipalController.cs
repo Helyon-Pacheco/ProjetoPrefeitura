@@ -89,13 +89,13 @@ public class ServicoMunicipalController : BaseController
     {
         try
         {
-            if (id != servicoMunicipal.Id)
+            servicoMunicipal.Id = id;
+            var resultado = await _servicoMunicipalService.AtualizarServicoMunicipalAsync(servicoMunicipal);
+            if (resultado == null)
             {
                 _logger.LogWarning($"ServicoMunicipal com Id {id} não encontrado");
                 return BadRequest();
             }
-
-            await _servicoMunicipalService.AtualizarServicoMunicipalAsync(servicoMunicipal);
             _logger.LogInformation($"ServicoMunicipal com Id {id} atualizado");
             return NoContent();
         }

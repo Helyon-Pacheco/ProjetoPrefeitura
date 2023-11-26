@@ -27,7 +27,9 @@ public class ReclamacaoRepository : IReclamacaoRepository
 
     public async Task<Reclamacao> ObterPorIdAsync(Guid id)
     {
-        return await _context.Reclamacoes.FindAsync(id);
+        return await _context.Reclamacoes
+            .AsNoTracking()
+            .FirstOrDefaultAsync(r => r.Id == id);
     }
 
     public async Task<IEnumerable<Reclamacao>> ObterPorObservacaoAsync(string observacao)
@@ -89,7 +91,16 @@ public class ReclamacaoRepository : IReclamacaoRepository
 
     public async Task<Reclamacao> Atualizar(Reclamacao reclamacao)
     {
-        _context.Reclamacoes.Update(reclamacao);
+        var reclamacaoExistente = await _context.Reclamacoes.FirstOrDefaultAsync(r => r.Id == reclamacao.Id);
+        if (reclamacaoExistente != null)
+        {
+            _context.Entry(reclamacaoExistente).CurrentValues.SetValues(reclamacao);
+        }
+        else
+        {
+            _context.Reclamacoes.Update(reclamacao);
+        }
+
         await _context.SaveChangesAsync();
         return reclamacao;
     }

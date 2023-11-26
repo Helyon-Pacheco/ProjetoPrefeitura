@@ -88,13 +88,13 @@ public class CidadaoController : BaseController
     {
         try
         {
-            if (id != cidadao.Id)
+            cidadao.Id = id;
+            var resultado = await _cidadaoService.AtualizarCidadaoAsync(cidadao);
+            if (resultado == null)
             {
                 _logger.LogWarning($"Cidadao com Id {id} não encontrado");
                 return BadRequest();
             }
-
-            await _cidadaoService.AtualizarCidadaoAsync(cidadao);
             _logger.LogInformation($"Cidadao com Id {id} atualizado");
             return NoContent();
         }

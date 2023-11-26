@@ -89,13 +89,13 @@ public class ReclamacaoController : BaseController
     {
         try
         {
-            if (id != reclamacao.Id)
+            reclamacao.Id = id;
+            var resultado = await _reclamacaoService.AtualizarReclamacaoAsync(reclamacao);
+            if (resultado == null)
             {
                 _logger.LogWarning($"Reclamacao com Id {id} não encontrado");
                 return BadRequest();
             }
-
-            await _reclamacaoService.AtualizarReclamacaoAsync(reclamacao);
             _logger.LogInformation($"Reclamacao com Id {reclamacao.Id} atualizado");
             return NoContent();
         }

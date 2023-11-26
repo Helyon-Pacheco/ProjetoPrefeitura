@@ -18,6 +18,7 @@ public class CidadaoRepository : ICidadaoRepository
     {
         return await _context.Cidadaos
             .Include(c => c.Endereco)
+            .AsNoTracking()
             .FirstOrDefaultAsync(c => c.Id == id);
     }
 
@@ -67,7 +68,16 @@ public class CidadaoRepository : ICidadaoRepository
 
     public async Task<Cidadao> Atualizar(Cidadao cidadao)
     {
-        _context.Cidadaos.Update(cidadao);
+        var cidadaoExistente = await _context.Cidadaos.FirstOrDefaultAsync(c => c.Id == cidadao.Id);
+        if (cidadaoExistente != null)
+        {
+            _context.Entry(cidadaoExistente).CurrentValues.SetValues(cidadao);
+        }
+        else
+        {
+            _context.Cidadaos.Update(cidadao);
+        }
+
         await _context.SaveChangesAsync();
         return cidadao;
     }

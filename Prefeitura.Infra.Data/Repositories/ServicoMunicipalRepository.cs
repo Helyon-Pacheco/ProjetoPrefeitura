@@ -17,7 +17,7 @@ public class ServicoMunicipalRepository : IServicoMunicipalRepository
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorCidadaoAsync(Cidadao cidadao)
     {
-        return await _context.Servicos.Where(s => s.EmpresaId == cidadao.Id).ToListAsync();
+        return await _context.Servicos.Where(s => s.CidadaoId == cidadao.Id).ToListAsync();
     }
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorDataPagamentoAsync(DateTime dataPagamento)
@@ -42,7 +42,9 @@ public class ServicoMunicipalRepository : IServicoMunicipalRepository
 
     public async Task<ServicoMunicipal> ObterPorIdAsync(Guid id)
     {
-        return await _context.Servicos.FirstOrDefaultAsync(s => s.Id == id);
+        return await _context.Servicos
+            .AsNoTracking()
+            .FirstOrDefaultAsync(s => s.Id == id);
     }
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorNomeAsync(string nome)
@@ -57,12 +59,12 @@ public class ServicoMunicipalRepository : IServicoMunicipalRepository
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorPropriedadeAsync(Propriedade propriedade)
     {
-        return await _context.Servicos.Where(s => s.EmpresaId == propriedade.Id).ToListAsync();
+        return await _context.Servicos.Where(s => s.PropriedadeId == propriedade.Id).ToListAsync();
     }
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorReclamacaoAsync(Reclamacao reclamacao)
     {
-        return await _context.Servicos.Where(s => s.EmpresaId == reclamacao.Id).ToListAsync();
+        return await _context.Servicos.Where(s => s.ReclamacaoId == reclamacao.Id).ToListAsync();
     }
 
     public async Task<IEnumerable<ServicoMunicipal>> ObterPorValorAsync(decimal valor)
@@ -114,7 +116,16 @@ public class ServicoMunicipalRepository : IServicoMunicipalRepository
 
     public async Task<ServicoMunicipal> Atualizar(ServicoMunicipal servicoMunicipal)
     {
-        _context.Servicos.Update(servicoMunicipal);
+        var servicoMunicipalAtual = await _context.Servicos.FirstOrDefaultAsync(s => s.Id == servicoMunicipal.Id);
+        if (servicoMunicipalAtual != null)
+        {
+            _context.Entry(servicoMunicipalAtual).CurrentValues.SetValues(servicoMunicipal);
+        }
+        else
+        {
+            _context.Servicos.Update(servicoMunicipal);
+        }
+        
         await _context.SaveChangesAsync();
         return servicoMunicipal;
     }

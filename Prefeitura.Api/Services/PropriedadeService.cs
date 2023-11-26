@@ -27,6 +27,11 @@ public class PropriedadeService : IPropriedadeService
 
     public async Task<PropriedadeDto> AtualizarPropriedadeAsync(PropriedadeDto propriedadeDto)
     {
+        var propriedadeExistente = await _propriedadeRepository.ObterPorIdAsync(propriedadeDto.Id);
+        if (propriedadeExistente == null)
+        {
+            return null;
+        }
         var propriedade = _mapper.Map<Propriedade>(propriedadeDto);
         var resultado = await _propriedadeRepository.Atualizar(propriedade);
         return _mapper.Map<PropriedadeDto>(resultado);

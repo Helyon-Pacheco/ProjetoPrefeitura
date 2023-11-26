@@ -37,7 +37,10 @@ public class EmpresaRepository : IEmpresaRepository
 
     public async Task<Empresa> ObterPorIdAsync(Guid id)
     {
-        return await _context.Empresas.FindAsync(id);
+        return await _context.Empresas
+            .Include(e => e.Endereco)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(e => e.Id == id);
     }
 
     public async Task<IEnumerable<Empresa>> ObterPorInscricaoEstadualAsync(string inscricaoEstadual)
@@ -84,7 +87,16 @@ public class EmpresaRepository : IEmpresaRepository
 
     public async Task<Empresa> Atualizar(Empresa empresa)
     {
-        _context.Empresas.Update(empresa);
+        var empresaAtual = await _context.Empresas.FirstOrDefaultAsync(e => e.Id == empresa.Id);
+        if (empresaAtual != null)
+        {
+            _context.Entry(empresaAtual).CurrentValues.SetValues(empresa);
+        }
+        else
+        {
+            _context.Empresas.Update(empresa);
+        }
+        
         await _context.SaveChangesAsync();
         return empresa;
     }

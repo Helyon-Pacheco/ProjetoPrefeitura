@@ -27,6 +27,11 @@ public class ReclamacaoService : IReclamacaoService
 
     public async Task<ReclamacaoDto> AtualizarReclamacaoAsync(ReclamacaoDto reclamacaoDto)
     {
+        var reclamacaoExistente = await _reclamacaoRepository.ObterPorIdAsync(reclamacaoDto.Id);
+        if (reclamacaoExistente == null)
+        {
+            return null;
+        }
         var reclamacao = _mapper.Map<Reclamacao>(reclamacaoDto);
         var resultado = await _reclamacaoRepository.Atualizar(reclamacao);
         return _mapper.Map<ReclamacaoDto>(resultado);

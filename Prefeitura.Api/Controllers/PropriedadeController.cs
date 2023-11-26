@@ -89,13 +89,13 @@ public class PropriedadeController : BaseController
     {
         try
         {
-            if (id != propriedade.Id)
+            propriedade.Id = id;
+            var resultado = await _propriedadeService.AtualizarPropriedadeAsync(propriedade);
+            if (resultado == null)
             {
                 _logger.LogWarning($"Propriedade com Id {id} não encontrada");
                 return BadRequest();
             }
-
-            await _propriedadeService.AtualizarPropriedadeAsync(propriedade);
             _logger.LogInformation($"Propriedade com Id {id} atualizada");
             return NoContent();
         }

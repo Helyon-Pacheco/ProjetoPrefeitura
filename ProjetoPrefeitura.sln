@@ -24,6 +24,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{6406E207-4B91-493C-94BC-3EF9C62528C8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prefeitura.WebApp.Mvc", "Prefeitura.WebApp.Mvc\Prefeitura.WebApp.Mvc.csproj", "{0A68FEE3-C292-40CA-B276-D72DD69F7747}"
+	ProjectSection(ProjectDependencies) = postProject
+		{045F14AB-B006-4994-8785-9D69DB615E1E} = {045F14AB-B006-4994-8785-9D69DB615E1E}
+		{9A64A864-C785-4D1F-B4F5-3107E83E95E9} = {9A64A864-C785-4D1F-B4F5-3107E83E95E9}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Prefeitura.Core", "Prefeitura.Core\Prefeitura.Core.csproj", "{9A64A864-C785-4D1F-B4F5-3107E83E95E9}"
 EndProject
