@@ -1,7 +1,7 @@
-# ProjetoPrefeitura
+# Proposta de API para acesso a serviÃ§os da Ãrea PÃºblica
 
-## Descrição
-ProjetoPrefeitura é uma API desenvolvida para gerenciar dados de cidadãos em um contexto de administração pública. Este projeto visa facilitar o acesso e a gestão de informações de forma eficiente e segura.
+## DescriÃ§Ã£o
+ProjetoPrefeitura Ã© uma proposta de API desenvolvida para gerenciar dados de cidadÃ£os em um contexto de administraÃ§Ã£o pÃºblica. Este projeto visa facilitar o acesso e a gestÃ£o de informaÃ§Ãµes de forma eficiente e segura.
 
 ## Tecnologias Utilizadas
 - .NET
@@ -10,21 +10,21 @@ ProjetoPrefeitura é uma API desenvolvida para gerenciar dados de cidadãos em um 
 - Docker
 
 ## Como Configurar e Executar
-1. Clone o repositório: `git clone https://github.com/Helyon-Pacheco/ProjetoPrefeitura.git`
-2. Instale as dependências: `comando de instalação`
-3. Execute o projeto: `comando de execução`
+1. Clone o repositÃ³rio: `git clone https://github.com/Helyon-Pacheco/ProjetoPrefeitura.git`
+2. Instale as dependÃªncias: `comando de instalaÃ§Ã£o`
+3. Execute o projeto: `comando de execuÃ§Ã£o`
 
 ## Estrutura do Projeto
-- `PrefeituraApi`: Contém a lógica da API.
-- `PrefeituraCore`: Define as entidades e a lógica de negócios.
-- `PrefeituraInfraData`: Gerencia a persistência de dados.
-- `PrefeituraWebAppMvc`: Interface do usuário para interagir com a API.
+- `PrefeituraApi`: ContÃ©m a lÃ³gica da API.
+- `PrefeituraCore`: Define as entidades e a lÃ³gica de negÃ³cios.
+- `PrefeituraInfraData`: Gerencia a persistÃªncia de dados.
+- `PrefeituraWebAppMvc`: Interface do usuÃ¡rio para interagir com a API.
 
-## Contribuição
-Contribuições são bem-vindas! Por favor, leia as diretrizes de contribuição antes de enviar pull requests.
+## ContribuiÃ§Ã£o
+ContribuiÃ§Ãµes sÃ£o bem-vindas! Por favor, leia as diretrizes de contribuiÃ§Ã£o antes de enviar pull requests.
 
-## Licença
-Este projeto está licenciado sob a Licença XYZ.
+## LicenÃ§a
+Este projeto estÃ¡ licenciado sob a LicenÃ§a XYZ.
 
 ## Contato e Suporte
-Para suporte ou mais informações, entre em contato conosco em [email de contato].
+Para suporte ou mais informaÃ§Ãµes, entre em contato conosco em [email de contato].
